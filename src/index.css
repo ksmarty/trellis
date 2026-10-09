@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink-950: #05060a;
+  --color-ink-900: #0a0c12;
+  --color-ink-850: #0e1018;
+  --color-ink-800: #14161f;
+  --color-ink-700: #1d2029;
+  --color-ink-600: #2a2e3a;
+
+  --color-acid-300: #ddff8a;
+  --color-acid-400: #c6f24e;
+  --color-acid-500: #a9d92f;
+
+  --color-flux-400: #6f8cff;
+  --color-flux-500: #4f6bff;
+
+  --animate-rise: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-blink: blink 1.05s step-end infinite;
+  --animate-pulse-ring: pulse-ring 2.6s ease-out infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.85);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(2.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.1);
+  }
+}
+
+@layer base {
+  * {
+    border-color: theme(--color-ink-700);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink-950);
+    color: #e8eaf2;
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-acid-400);
+    color: var(--color-ink-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-acid-400);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@utility grain {
+  position: relative;
+}
+
+@utility text-balance-tight {
+  text-wrap: balance;
+}
+
+/* Faint blueprint grid used behind the hero and CTA band. */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-ink-600) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-ink-600) 55%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 35%, transparent 78%);
+}
+
+.bg-grid-fade {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-ink-600) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-ink-600) 45%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 75%);
+}
+
+.hairline {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-ink-600) 90%, transparent) 18%,
+    color-mix(in oklab, var(--color-ink-600) 90%, transparent) 82%,
+    transparent
+  );
+  height: 1px;
+}
+
+.acid-glow {
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--color-acid-400) 32%, transparent),
+    0 12px 40px -12px color-mix(in oklab, var(--color-acid-400) 45%, transparent);
+}
+
+.card {
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--color-ink-850) 92%, transparent), var(--color-ink-900));
+  border: 1px solid var(--color-ink-700);
+  transition:
+    border-color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.card:hover {
+  border-color: color-mix(in oklab, var(--color-acid-400) 38%, var(--color-ink-700));
+  transform: translateY(-2px);
+  box-shadow: 0 18px 44px -24px rgba(0, 0, 0, 0.9);
+}
+
+/* Scroll reveal: hidden until .is-visible is toggled by IntersectionObserver. */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition:
+    opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-marquee,
+  .animate-blink,
+  .animate-pulse-ring {
+    animation: none !important;
+  }
+}
