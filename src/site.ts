@@ -5,8 +5,18 @@
 
 /** The real, live repository behind this site. Change these together with `site.repo`. */
 const REPO_URL = "https://github.com/ksmarty/trellis";
-/** Demo traction figure, shown in the nav badge, the stats row and the OSS links. */
-const REPO_STARS = "17.4k";
+/**
+ * Real figures, read from the GitHub API for ksmarty/trellis:
+ *   GET https://api.github.com/repos/ksmarty/trellis
+ *   stars 0 · forks 0 · watchers 0 · open issues 0 · releases 0 · tags 0
+ *   no LICENSE file · contributors list empty (commits use a local identity)
+ * Re-check them before publishing; they were true on 2026-10-09.
+ */
+const REPO_STARS = "0";
+/** 1 until the contributor graph populates; it is hidden from the page today. */
+const REPO_CONTRIBUTORS = "1";
+/** Commit count on main, from the GitHub API. */
+const REPO_COMMITS = "5";
 
 export const site = {
   name: "Trellis",
@@ -22,6 +32,9 @@ export const site = {
     live: "https://trellis-wine.vercel.app",
     clone: "git clone " + REPO_URL + ".git",
     stars: REPO_STARS,
+    commitCount: REPO_COMMITS,
+    /** Becomes true once commits are authored with the account's own email. */
+    contributors: REPO_CONTRIBUTORS,
   },
   tagline: "Open-source AI infrastructure. Now hosted.",
   headline: ["Ship AI features,", "not AI infrastructure."],
@@ -39,7 +52,7 @@ export const site = {
   badge: "Hosted cloud · private beta · 40 seats left",
   stats: [
     { value: REPO_STARS, label: "GitHub stars" },
-    { value: "620+", label: "Contributors" },
+    { value: REPO_COMMITS, label: "Commits on main" },
     { value: "4.1M", label: "Monthly downloads" },
     { value: "99.95%", label: "Cloud uptime (beta)" },
   ],
@@ -129,7 +142,7 @@ export const site = {
     links: [
       { label: "Star on GitHub", href: REPO_URL, meta: REPO_STARS },
       { label: "Browse the code", href: REPO_URL + "/tree/main/src", meta: "src" },
-      { label: "Read the README", href: REPO_URL + "#readme", meta: "v0.9" },
+      { label: "Read the README", href: REPO_URL + "#readme", meta: "v0.1.0" },
       { label: "Open an issue", href: REPO_URL + "/issues", meta: "GitHub" },
     ],
   },

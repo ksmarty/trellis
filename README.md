@@ -46,7 +46,9 @@ The repository is defined once, at the top of that file:
 
 ```ts
 const REPO_URL = "https://github.com/ksmarty/trellis";  // this repo
-const REPO_STARS = "17.4k";                             // demo figure
+const REPO_STARS = "0";        // real: read from the GitHub API
+const REPO_CONTRIBUTORS = "1"; // real
+const REPO_COMMITS = "5";      // real: commits on main
 ```
 
 `site.repo` derives every other link from `REPO_URL` (README, issues, source tree,
@@ -59,11 +61,19 @@ is the repo this site lives in, and the `/tree/main/src`, `/issues` and `#readme
 paths all resolve. `npm run check:browser` fails the build if a dead `href="#"`
 reappears or if a repo link is dropped.
 
-Still invented for the demo, and **not** true of this repo — replace before
+Numbers a visitor can check against the repo are **real** (verified 2026-10-09):
+0 stars, 5 commits on `main`. The README version badge shows the package version
+(`0.1.0`), not an invented one.
+
+Still invented — nothing links these to a checkable source, but replace them before
 publishing anything you want taken literally:
 
-- traction figures: GitHub stars (17.4k), contributors (620+), downloads (4.1M),
-  uptime (99.95%)
+- stats: monthly downloads (4.1M), cloud uptime (99.95%) — and the 99.95% SLA
+  in the Scale pricing tier
+- the contributors stat and the Discord member count (both removed from the page;
+  `site.repo.contributors` exists but is not rendered — GitHub's contributor graph
+  is still empty because commits are authored with a local identity, not the
+  account's email)
 - named customers in the logo marquee
 - the runtime itself: `@trellis/cli`, `trellis deploy`, `*.trellis.run` domains,
   `docker compose` services, and the hosted-cloud control plane

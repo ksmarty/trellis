@@ -21,6 +21,10 @@ const checks: Array<[string, boolean]> = [
   ["no unresolved mock urls", !html.includes("trellis-labs.example")],
   ["repo url present", html.includes("https://github.com/ksmarty/trellis")],
   ["no dead placeholder links", !/<a[^>]*href="#"/.test(html)],
+  [
+    "no invented github numbers",
+    !html.includes("17.4k") && !html.includes("620+") && !html.includes("3.2k"),
+  ],
 ];
 
 const failed = checks.filter(([, ok]) => !ok);
