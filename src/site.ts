@@ -3,8 +3,26 @@
  * Rebrand by editing this file only.
  */
 
+/** The real, live repository behind this site. Change these together with `site.repo`. */
+const REPO_URL = "https://github.com/ksmarty/trellis";
+/** Demo traction figure, shown in the nav badge, the stats row and the OSS links. */
+const REPO_STARS = "17.4k";
+
 export const site = {
   name: "Trellis",
+  repo: {
+    owner: "ksmarty",
+    name: "trellis",
+    slug: "ksmarty/trellis",
+    url: REPO_URL,
+    readme: REPO_URL + "#readme",
+    issues: REPO_URL + "/issues",
+    commits: REPO_URL + "/commits/main",
+    source: REPO_URL + "/tree/main/src",
+    live: "https://trellis-wine.vercel.app",
+    clone: "git clone " + REPO_URL + ".git",
+    stars: REPO_STARS,
+  },
   tagline: "Open-source AI infrastructure. Now hosted.",
   headline: ["Ship AI features,", "not AI infrastructure."],
   subhead:
@@ -20,7 +38,7 @@ export const site = {
   ],
   badge: "Hosted cloud · private beta · 40 seats left",
   stats: [
-    { value: "17.4k", label: "GitHub stars" },
+    { value: REPO_STARS, label: "GitHub stars" },
     { value: "620+", label: "Contributors" },
     { value: "4.1M", label: "Monthly downloads" },
     { value: "99.95%", label: "Cloud uptime (beta)" },
@@ -109,9 +127,10 @@ export const site = {
       "Every hosted change lands upstream as a design RFC first.",
     ],
     links: [
-      { label: "Star on GitHub", href: "#", meta: "17.4k" },
-      { label: "Read the docs", href: "#", meta: "v0.9" },
-      { label: "Join Discord", href: "#", meta: "3.2k" },
+      { label: "Star on GitHub", href: REPO_URL, meta: REPO_STARS },
+      { label: "Browse the code", href: REPO_URL + "/tree/main/src", meta: "src" },
+      { label: "Read the README", href: REPO_URL + "#readme", meta: "v0.9" },
+      { label: "Open an issue", href: REPO_URL + "/issues", meta: "GitHub" },
     ],
   },
   pricing: {
@@ -130,7 +149,7 @@ export const site = {
           "Community support",
           "BYO vector store & models",
         ],
-        cta: { label: "Clone the repo", href: "#open-source" },
+        cta: { label: "Clone the repo", href: REPO_URL },
         featured: false,
       },
       {
@@ -211,25 +230,25 @@ export const site = {
           { label: "Platform", href: "#platform" },
           { label: "Features", href: "#features" },
           { label: "Pricing", href: "#pricing" },
-          { label: "Changelog", href: "#" },
+          { label: "Repository", href: REPO_URL },
         ],
       },
       {
         title: "Developers",
         links: [
-          { label: "Documentation", href: "#" },
-          { label: "GitHub", href: "#open-source" },
-          { label: "Examples", href: "#" },
-          { label: "Status", href: "#" },
+          { label: "README", href: REPO_URL + "#readme" },
+          { label: "GitHub", href: REPO_URL },
+          { label: "Source", href: REPO_URL + "/tree/main/src" },
+          { label: "Issues", href: REPO_URL + "/issues" },
         ],
       },
       {
         title: "Company",
         links: [
-          { label: "About", href: "#" },
-          { label: "Blog", href: "#" },
-          { label: "Careers", href: "#" },
-          { label: "Contact", href: "#" },
+          { label: "About", href: "#platform" },
+          { label: "Live site", href: "https://trellis-wine.vercel.app" },
+          { label: "Contact", href: "#waitlist" },
+          { label: "Terms", href: "#faq" },
         ],
       },
     ],

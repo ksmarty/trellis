@@ -48,11 +48,12 @@ export function Nav() {
 
         <div className="ml-auto flex items-center gap-2 lg:ml-0">
           <a
-            href={site.secondaryCta.href}
+            href={site.repo.url}
             className="hidden items-center gap-1.5 rounded-lg border border-ink-700 px-3.5 py-2 text-sm text-white/75 transition-colors hover:border-ink-600 hover:text-white sm:flex"
+            aria-label={`Star ${site.repo.slug} on GitHub`}
           >
             <IconStar className="h-3.5 w-3.5 text-acid-400" />
-            17.4k
+            {site.repo.stars}
           </a>
           <a
             href={site.primaryCta.href}

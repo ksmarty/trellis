@@ -70,22 +70,23 @@ function ReadmeCard() {
   return (
     <div className="overflow-hidden rounded-2xl border border-ink-700 bg-ink-950/80 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.9)]">
       <div className="flex items-center gap-2 border-b border-ink-800 px-4 py-3">
-        <span className="font-mono text-[0.75rem] text-white/45">trellis-labs/trellis</span>
+        <span className="font-mono text-[0.75rem] text-white/45">{site.repo.slug}</span>
         <span className="ml-auto rounded-full border border-ink-700 px-2 py-0.5 font-mono text-[0.75rem] text-acid-400">
           Apache-2.0
         </span>
       </div>
       <div className="space-y-3 p-5 font-mono text-[0.8rem] leading-relaxed">
         <p className="text-white/40"># clone and run it locally</p>
-        <p className="text-acid-400">$ git clone https://github.com/trellis-labs/trellis</p>
-        <p className="text-acid-400">$ cd trellis && docker compose up</p>
-        <p className="mt-4 text-white/40">services</p>
+        <p className="text-acid-400">$ {site.repo.clone}</p>
+        <p className="text-acid-400">$ cd {site.repo.name} &amp;&amp; npm install</p>
+        <p className="text-acid-400">$ npm run dev</p>
+        <p className="mt-4 text-white/40">checks</p>
         <div className="space-y-1.5">
           {[
-            ["api", ":8787", "healthy"],
-            ["worker", "2 replicas", "healthy"],
-            ["postgres", "pgvector", "healthy"],
-            ["dashboard", ":3000", "healthy"],
+            ["npm test", "SSR render", "passed"],
+            ["npm run lint", "eslint", "clean"],
+            ["npm run build", "tsc + vite", "ok"],
+            ["npm run check:a11y", "21 checks", "passed"],
           ].map(([name, meta, state]) => (
             <div key={name} className="flex items-center gap-3 rounded-lg border border-ink-800 bg-ink-900/60 px-3 py-2">
               <span className="text-white/80">{name}</span>

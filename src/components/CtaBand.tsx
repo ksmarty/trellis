@@ -22,7 +22,7 @@ export function CtaBand() {
         <div className="mt-8 flex justify-center">
           <div className="flex w-full max-w-md items-center gap-2 rounded-xl border border-ink-700 bg-ink-900/80 px-4 py-3 font-mono text-[0.75rem] text-white/60 backdrop-blur sm:text-[0.8rem]">
             <span className="text-acid-400">$</span>
-            <span className="truncate">git clone github.com/trellis-labs/trellis</span>
+            <span className="truncate">{site.repo.clone}</span>
             <span className="ml-auto text-white/25">↩ copy</span>
           </div>
         </div>

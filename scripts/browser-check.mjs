@@ -198,6 +198,21 @@ check("terminal typed out", terminalLines >= 8, `${terminalLines} lines`);
 const fontLoaded = await evaluate("document.fonts ? document.fonts.status : 'n/a'");
 check("fonts resolved", fontLoaded === "loaded" || fontLoaded === "n/a", fontLoaded);
 
+const deadLinks = await evaluate(
+  "JSON.stringify([...document.querySelectorAll('a')].map(a => a.getAttribute('href')).filter(h => !h || h === '#' || h === ''))",
+);
+check("no dead placeholder links", JSON.parse(deadLinks).length === 0, deadLinks);
+
+const insecureLinks = await evaluate(
+  "JSON.stringify([...document.querySelectorAll('a[href^=\"http\"]')].map(a => a.getAttribute('href')).filter(h => !h.startsWith('https://')))",
+);
+check("external links use https", JSON.parse(insecureLinks).length === 0, insecureLinks);
+
+const repoLinks = await evaluate(
+  "JSON.stringify([...document.querySelectorAll('a')].map(a => a.getAttribute('href')).filter(h => h.includes('github.com/ksmarty/trellis')))",
+);
+check("repo links point at ksmarty/trellis", JSON.parse(repoLinks).length >= 4, `${JSON.parse(repoLinks).length} links`);
+
 check("no console errors", consoleErrors.length === 0, consoleErrors.join(" | "));
 check("no uncaught exceptions", pageErrors.length === 0, pageErrors.join(" | "));
 check("no failed requests", failedRequests.length === 0, failedRequests.join(" | "));
